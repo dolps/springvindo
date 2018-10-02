@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.dolp.vindo",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "5.3.4",
+    "applicationType": "monolith",
+    "baseName": "vindo",
+    "packageName": "com.dolp.vindo",
+    "packageFolder": "com/dolp/vindo",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MDcxOTgyZDQ0YzhjNjU3OWZjZGQ5ZDRkNWE2ZWE2Y2I0M2MzOWUzMDUyYTBmYTY2ZDJlOWIyYjRhNjRjNDM1ZjI5OTkxZTY3OWI3MDhkYTMyMTg0YjI1NTU0YTUyMzVlN2I0MmMwNDk2NTY2Mjc1NTI3YTI5OGNjMDA2M2ZhNmI=",
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ]
+  }
+}
