@@ -78,6 +78,7 @@ public class VindoApp {
 
         if (measurementResponse.getMeasurements() != null) {
             log.info("measurement: " + measurementResponse.getMeasurements().get(0).toString());
+            log.info("norwegian direction: " + measurementResponse.getMeasurements().get(0).getNorwegianNameFromDirectionValue());
         } else {
             log.info("measurement not found");
         }

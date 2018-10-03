@@ -30,11 +30,15 @@ public class Measurement {
     @XmlElement(name = "WindMin")
     private double windMin;
     @XmlElement(name = "DirectionAvg")
-    private double directionAvg;
+    private int directionAvg;
     @XmlElement(name = "DirectionVectorAvg")
-    private double directionVectorAvg;
+    private int directionVectorAvg;
     @XmlElement(name = "DirectionStDev")
     private double directionStDev;
     @XmlElement(name = "Temperature1")
     private double temperature;
+
+    public String getNorwegianNameFromDirectionValue() {
+        return WindDirection.getWindDirectionFromValue(this.directionAvg);
+    }
 }
