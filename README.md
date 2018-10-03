@@ -2,6 +2,9 @@
 This application was generated using JHipster 5.3.4, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.3.4](https://www.jhipster.tech/documentation-archive/v5.3.4).
 
 ## Development
+### lombok
+This project uses lombok so for an IDE you would need the lombok plugin
+for not showing errors.
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
