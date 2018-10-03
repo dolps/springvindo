@@ -3,6 +3,8 @@ package com.dolp.vindo;
 import com.dolp.vindo.config.ApplicationProperties;
 import com.dolp.vindo.config.DefaultProfileUtil;
 
+import com.dolp.vindo.domain.Measurement;
+import com.dolp.vindo.domain.MeasurementResponse;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,12 +15,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
@@ -62,6 +66,21 @@ public class VindoApp {
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
+
+        fetchVindsidenData();
+    }
+
+    private static void fetchVindsidenData() {
+        RestTemplate template = new RestTemplate();
+        MeasurementResponse measurementResponse = template.getForObject("http://vindsiden.no/xml.aspx?id=3", MeasurementResponse.class);
+        //Measurement[] measurements = template.getForObject("http://vindsiden.no/xml.aspx?id=3", Measurement[].class);
+
+
+        if (measurementResponse.getMeasurements() != null) {
+            log.info("measurement: " + measurementResponse.getMeasurements().get(0).toString());
+        } else {
+            log.info("measurement not found");
+        }
     }
 
     private static void logApplicationStartup(Environment env) {
