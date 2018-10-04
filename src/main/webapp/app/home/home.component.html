@@ -1,7 +1,16 @@
 <div class="row">
     <div class="col-md-12">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            <agm-marker *ngFor="let location of surfLocations"
+                        [latitude]="location.lat"
+                        [iconUrl]="location.icon"
+                        (mouseOver)="mouseOver(location, i)"
+                        [longitude]="location.lng">
+
+                <agm-info-window>
+                    <strong>InfoWindow content</strong>
+                </agm-info-window>
+            </agm-marker>
         </agm-map>
         <!-- green winddirection
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">

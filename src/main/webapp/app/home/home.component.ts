@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { LoginModalService, Principal, Account } from 'app/core';
+import {LoginModalService, Principal, Account} from 'app/core';
 
 @Component({
     selector: 'jhi-home',
@@ -12,17 +12,25 @@ import { LoginModalService, Principal, Account } from 'app/core';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    surfLocations: any;
+    lat = 59.664890;
+    lng = 10.630013;
 
-    lat: number = 59.664890;
-    lng: number = 10.630013;
-
-    constructor(private principal: Principal, private loginModalService: LoginModalService, private eventManager: JhiEventManager) {}
+    constructor(private principal: Principal, private loginModalService: LoginModalService, private eventManager: JhiEventManager) {
+    }
 
     ngOnInit() {
         this.principal.identity().then(account => {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+        this.surfLocations = [];
+
+        const verket = {lat: 59.612221, lng: 10.413914};
+        const haldenBrygge = {lat: 59.888479, lng: 10.634014};
+
+        this.surfLocations[0] = verket;
+        this.surfLocations[1] = haldenBrygge;
     }
 
     registerAuthenticationSuccess() {
@@ -31,6 +39,9 @@ export class HomeComponent implements OnInit {
                 this.account = account;
             });
         });
+    }
+    mouseOver(m: any, i:number){
+        m.icon = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
     }
 
     isAuthenticated() {
