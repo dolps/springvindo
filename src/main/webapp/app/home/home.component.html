@@ -1,11 +1,9 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
-
-        <!-- green winddirection -->
+    <div class="col-md-12">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+        <!-- green winddirection
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
             <path d="M 12,2 21,5 14,7 8,11 z" fill="green"></path>
             <path d="M 14,7 15,9 z M 25,31 26,33 z" stroke="green" stroke-width="2"></path>
@@ -17,18 +15,27 @@
                   style="font-family:Helvetica,Arial,sans-serif;font-size:16;fill:green;">3
             </text>
         </svg>
+        -->
+        <!--
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
             <path d="M 28,2 32,11 26,7 19,5 z" fill="green"/>
-            <path d="M 26,7 25,9 z M 15,31 14,33 z" stroke="green" stroke-width="2"/>
+            <path d="M 26,7 25,9 z M 15,31 14,33 z" stroke="green" stroke-width="2" transform='rotate(45 140 105)'/>
             <circle cx="20" cy="20" r="11.764705882352942" stroke="green" stroke-width="1" fill-opacity="0.8"
                     fill="white"/>
             <text x="20" y="25.555555555555557" text-anchor="middle"
                   style="font-family:Helvetica,Arial,sans-serif;font-size:16.129032258064516;fill:green;">3
             </text>
         </svg>
+        -->
+        <!--
+        <svg>
+            <rect x='65' y='65' width='150' height='80'
+                  transform='rotate(45 140 105)'/>
+        </svg>
+        -->
 
 
-        <!-- red no wind -->
+        <!-- red no wind
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
             <circle cx="20" cy="20" r="11.764705882352942" stroke="red" stroke-width="1" fill-opacity="0.8"
                     fill="white">
@@ -37,9 +44,11 @@
                   style="font-family:Helvetica,Arial,sans-serif;font-size:16;fill:red;">--
             </text>
         </svg>
+-->
+        <!-- this creates a google map on the page with the given lat/lng from -->
+        <!-- the component as the initial center of the map: -->
 
-        <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
-
+        <!--
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
@@ -57,28 +66,6 @@
                     new account</a>
             </div>
         </div>
-
-        <p jhiTranslate="home.question">
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener" jhiTranslate="home.link.homepage">JHipster
-                homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener"
-                   jhiTranslate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank"
-                   rel="noopener" jhiTranslate="home.link.bugtracker">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener"
-                   jhiTranslate="home.link.chat">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener"
-                   jhiTranslate="home.link.follow">follow @java_hipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a
-            href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener"
-            jhiTranslate="home.github">GitHub</a>!
-        </p>
+        -->
     </div>
 </div>

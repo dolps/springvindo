@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
 
+    lat: number = 59.664890;
+    lng: number = 10.630013;
+
     constructor(private principal: Principal, private loginModalService: LoginModalService, private eventManager: JhiEventManager) {}
 
     ngOnInit() {
