@@ -10,7 +10,7 @@ import * as Highcharts from 'highcharts';
                 [options]="chartOptions"
 
                 style="width: 50%; height: 400px; display: block;">
-                
+
             </highcharts-chart>
         </div>`
 })
@@ -20,7 +20,10 @@ export class TodayWindChartComponent implements OnInit, OnDestroy {
     chartOptions = {
         series: [{
             data: [1, 2, 3]
-        }]
+        }],
+        title: {
+            text: 'a good title'
+        }
     };
 
     constructor() {
