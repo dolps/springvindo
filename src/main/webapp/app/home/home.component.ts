@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
             });
         });
     }
-    mouseOver(m: any, i:number){
+    markerClicked(m: any, i:number){
         m.icon = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
     }
 

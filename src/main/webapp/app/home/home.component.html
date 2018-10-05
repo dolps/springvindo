@@ -4,7 +4,7 @@
             <agm-marker *ngFor="let location of surfLocations"
                         [latitude]="location.lat"
                         [iconUrl]="location.icon"
-                        (mouseOver)="mouseOver(location, i)"
+                        (markerClick)="markerClicked(location, i)"
                         [longitude]="location.lng">
 
                 <agm-info-window>
