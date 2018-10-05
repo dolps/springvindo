@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import {VindoSharedModule} from 'app/shared';
 import {HOME_ROUTE, HomeComponent} from './';
 import {AgmCoreModule} from '@agm/core';
+import {TodayWindChartComponent} from "../shared";
 
 @NgModule({
     imports: [
@@ -13,7 +14,7 @@ import {AgmCoreModule} from '@agm/core';
             apiKey: 'AIzaSyCCkjCvmWKUF7RUPN22GFn40a18DjE469I'
         })
     ],
-    declarations: [HomeComponent],
+    declarations: [HomeComponent, TodayWindChartComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VindoHomeModule {

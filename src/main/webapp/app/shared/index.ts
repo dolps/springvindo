@@ -7,6 +7,8 @@ export * from './auth/has-any-authority.directive';
 export * from './language/find-language-from-key.pipe';
 export * from './login/login.component';
 export * from './util/request-util';
+export * from './chart/today-wind-chart.component';
+
 export * from './shared-libs.module';
 export * from './shared-common.module';
 export * from './shared.module';
