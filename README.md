@@ -6,6 +6,10 @@ This application was generated using JHipster 5.3.4, you can find documentation 
 This project uses lombok so for an IDE you would need the lombok plugin
 for not showing errors.
 
+### Highcharts
+See documentation at https://github.com/highcharts/highcharts-angular
+
+### Before build
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
 1. [Node.js][]: We use Node to run a development web server and build the project.
