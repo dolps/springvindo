@@ -14,9 +14,11 @@ require('highcharts/highcharts-more')(Highcharts);
             <highcharts-chart
                 [Highcharts]="Highcharts"
                 [options]="chartOptions"
-
-                style="width: 50%; height: 400px; display: block;">
-
+                style="
+                min-width: 300px;
+                max-width: 800px;
+                height: 300px;
+                margin: 1em auto;">
             </highcharts-chart>
         </div>`
 })
