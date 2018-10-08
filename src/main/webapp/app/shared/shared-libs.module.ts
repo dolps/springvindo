@@ -6,7 +6,8 @@ import {NgJhipsterModule} from 'ng-jhipster';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {CookieModule} from 'ngx-cookie';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {HighchartsChartModule} from "highcharts-angular";
+import {HighchartsChartModule,} from "highcharts-angular";
+
 
 @NgModule({
     imports: [
