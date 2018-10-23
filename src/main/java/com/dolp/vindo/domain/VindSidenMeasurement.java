@@ -12,9 +12,9 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = "Measurement")
+@XmlRootElement(name = "VindSidenMeasurement")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Measurement {
+public class VindSidenMeasurement {
     @XmlElement(name = "DataID")
     private int dataId;
     @XmlElement(name = "StationID")

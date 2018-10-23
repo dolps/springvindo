@@ -3,8 +3,7 @@ package com.dolp.vindo;
 import com.dolp.vindo.config.ApplicationProperties;
 import com.dolp.vindo.config.DefaultProfileUtil;
 
-import com.dolp.vindo.domain.Measurement;
-import com.dolp.vindo.domain.MeasurementResponse;
+import com.dolp.vindo.domain.VindSidenMeasurementResponse;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +21,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
@@ -72,13 +70,13 @@ public class VindoApp {
 
     private static void fetchVindsidenData() {
         RestTemplate template = new RestTemplate();
-        MeasurementResponse measurementResponse = template.getForObject("http://vindsiden.no/xml.aspx?id=3", MeasurementResponse.class);
-        //Measurement[] measurements = template.getForObject("http://vindsiden.no/xml.aspx?id=3", Measurement[].class);
+        VindSidenMeasurementResponse vindSidenMeasurementResponse = template.getForObject("http://vindsiden.no/xml.aspx?id=3", VindSidenMeasurementResponse.class);
+        //VindSidenMeasurement[] vindSidenMeasurements = template.getForObject("http://vindsiden.no/xml.aspx?id=3", VindSidenMeasurement[].class);
 
 
-        if (measurementResponse.getMeasurements() != null) {
-            log.info("measurement: " + measurementResponse.getMeasurements().get(0).toString());
-            log.info("norwegian direction: " + measurementResponse.getMeasurements().get(0).getNorwegianNameFromDirectionValue());
+        if (vindSidenMeasurementResponse.getVindSidenMeasurements() != null) {
+            log.info("measurement: " + vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).toString());
+            log.info("norwegian direction: " + vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).getNorwegianNameFromDirectionValue());
         } else {
             log.info("measurement not found");
         }

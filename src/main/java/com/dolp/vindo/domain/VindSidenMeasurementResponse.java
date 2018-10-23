@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @XmlRootElement(name = "Data")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class MeasurementResponse {
-    @XmlElement(name = "Measurement")
-    private List<Measurement> measurements;
+public class VindSidenMeasurementResponse {
+    @XmlElement(name = "VindSidenMeasurement")
+    private List<VindSidenMeasurement> vindSidenMeasurements;
 }
