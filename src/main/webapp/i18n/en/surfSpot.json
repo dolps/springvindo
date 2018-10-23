@@ -1,0 +1,22 @@
+
+{
+    "vindoApp": {
+        "surfSpot" : {
+            "home": {
+                "title": "Surf Spots",
+                "createLabel": "Create a new Surf Spot",
+                "createOrEditLabel": "Create or edit a Surf Spot"
+            },
+            "created": "A new Surf Spot is created with identifier {{ param }}",
+            "updated": "A Surf Spot is updated with identifier {{ param }}",
+            "deleted": "A Surf Spot is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Surf Spot {{ id }}?"
+            },
+            "detail": {
+                "title": "Surf Spot"
+            },
+            "name": "Name"
+        }
+    }
+}
