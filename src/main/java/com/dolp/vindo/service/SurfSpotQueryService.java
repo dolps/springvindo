@@ -78,6 +78,12 @@ public class SurfSpotQueryService extends QueryService<SurfSpot> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), SurfSpot_.name));
             }
+            if (criteria.getLatitude() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLatitude(), SurfSpot_.latitude));
+            }
+            if (criteria.getLongitude() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLongitude(), SurfSpot_.longitude));
+            }
         }
         return specification;
     }

@@ -23,6 +23,12 @@ public class SurfSpot implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -43,6 +49,32 @@ public class SurfSpot implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public SurfSpot latitude(Double latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public SurfSpot longitude(Double longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -71,6 +103,8 @@ public class SurfSpot implements Serializable {
         return "SurfSpot{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", latitude=" + getLatitude() +
+            ", longitude=" + getLongitude() +
             "}";
     }
 }

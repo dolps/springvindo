@@ -26,6 +26,10 @@ public class SurfSpotCriteria implements Serializable {
 
     private StringFilter name;
 
+    private DoubleFilter latitude;
+
+    private DoubleFilter longitude;
+
     public SurfSpotCriteria() {
     }
 
@@ -45,6 +49,22 @@ public class SurfSpotCriteria implements Serializable {
         this.name = name;
     }
 
+    public DoubleFilter getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(DoubleFilter latitude) {
+        this.latitude = latitude;
+    }
+
+    public DoubleFilter getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(DoubleFilter longitude) {
+        this.longitude = longitude;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -57,14 +77,18 @@ public class SurfSpotCriteria implements Serializable {
         final SurfSpotCriteria that = (SurfSpotCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(name, that.name);
+            Objects.equals(name, that.name) &&
+            Objects.equals(latitude, that.latitude) &&
+            Objects.equals(longitude, that.longitude);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        name
+        name,
+        latitude,
+        longitude
         );
     }
 
@@ -73,6 +97,8 @@ public class SurfSpotCriteria implements Serializable {
         return "SurfSpotCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (latitude != null ? "latitude=" + latitude + ", " : "") +
+                (longitude != null ? "longitude=" + longitude + ", " : "") +
             "}";
     }
 

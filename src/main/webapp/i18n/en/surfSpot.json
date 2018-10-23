@@ -16,7 +16,9 @@
             "detail": {
                 "title": "Surf Spot"
             },
-            "name": "Name"
+            "name": "Name",
+            "latitude": "Latitude",
+            "longitude": "Longitude"
         }
     }
 }

@@ -16,6 +16,8 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="vindoApp.surfSpot.name">Name</span></th>
+            <th><span jhiTranslate="vindoApp.surfSpot.latitude">Latitude</span></th>
+            <th><span jhiTranslate="vindoApp.surfSpot.longitude">Longitude</span></th>
             <th></th>
             </tr>
             </thead>
@@ -23,6 +25,8 @@
             <tr *ngFor="let surfSpot of surfSpots ;trackBy: trackId">
                 <td><a [routerLink]="['/surf-spot', surfSpot.id, 'view' ]">{{surfSpot.id}}</a></td>
                 <td>{{surfSpot.name}}</td>
+                <td>{{surfSpot.latitude}}</td>
+                <td>{{surfSpot.longitude}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

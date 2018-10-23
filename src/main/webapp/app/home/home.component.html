@@ -1,11 +1,14 @@
 <div class="row">
     <div class="col-md-12">
+        <div *ngFor="let l of surfSpots">
+            {{l.name}}{{l.latitude}}
+        </div>
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
-            <agm-marker *ngFor="let location of surfLocations; let i=index;"
-                        [latitude]="location.lat"
+            <agm-marker *ngFor="let location of surfSpots; let i=index;"
+                        [latitude]="location.latitude"
+                        [longitude]="location.longitude"
                         [iconUrl]="location.icon"
-                        (markerClick)="markerClicked(location, i)"
-                        [longitude]="location.lng">
+                        (markerClick)="markerClicked(location, i)">
 
                 <agm-info-window>
                     <jhi-today-wind-chart>

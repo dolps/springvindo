@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {JhiEventManager} from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import {LoginModalService, Principal, Account} from 'app/core';
+import {SurfSpotService} from '../entities/surf-spot';
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {ISurfSpot} from "../shared/model/surf-spot.model";
 
 @Component({
     selector: 'jhi-home',
@@ -12,18 +15,26 @@ import {LoginModalService, Principal, Account} from 'app/core';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
+    surfSpots: ISurfSpot[];
     surfLocations: any;
     lat = 59.664890;
     lng = 10.630013;
 
-    constructor(private principal: Principal, private loginModalService: LoginModalService, private eventManager: JhiEventManager) {
+    constructor(private principal: Principal,
+                private loginModalService: LoginModalService,
+                private eventManager: JhiEventManager,
+                private jhiAlertService: JhiAlertService,
+                private surfSpotService: SurfSpotService) {
     }
 
     ngOnInit() {
+        this.loadSurfSpots();
+
         this.principal.identity().then(account => {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+
         this.surfLocations = [];
 
         const verket = {lat: 59.612221, lng: 10.413914};
@@ -51,5 +62,18 @@ export class HomeComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+    }
+
+    loadSurfSpots() {
+        this.surfSpotService.query().subscribe(
+            (res: HttpResponse<ISurfSpot[]>) => {
+                this.surfSpots = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
     }
 }
