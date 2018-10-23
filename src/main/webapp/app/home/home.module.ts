@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router';
 import {VindoSharedModule} from 'app/shared';
 import {HOME_ROUTE, HomeComponent} from './';
 import {AgmCoreModule} from '@agm/core';
-import {TodayWindChartComponent} from "../shared";
+import {TodayWindChartComponent} from '../shared';
 
 @NgModule({
     imports: [

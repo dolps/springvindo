@@ -6,7 +6,6 @@ require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/windbarb')(Highcharts);
 require('highcharts/highcharts-more')(Highcharts);
 
-
 @Component({
     selector: 'jhi-today-wind-chart',
     template: `

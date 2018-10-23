@@ -40,8 +40,9 @@ export class HomeComponent implements OnInit {
             });
         });
     }
-    markerClicked(m: any, i:number){
-        m.icon = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+    markerClicked(m: any, i: number) {
+        m.icon = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
     }
 
     isAuthenticated() {
