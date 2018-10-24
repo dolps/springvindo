@@ -11,21 +11,17 @@ import org.springframework.stereotype.Component;
 public class Dummydata implements ApplicationRunner {
     @Autowired
     private SurfSpotRepository repository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        SurfSpot verket = new SurfSpot();
-        verket.setId(1L);
-        verket.setName("Verkest");
-        verket.setLatitude(59.612221);
-        verket.longitude(10.413914);
-        repository.save(verket);
+        repository.save(new SurfSpot()
+            .name("Verket")
+            .latitude(59.612221)
+            .longitude(10.413914));
 
-        SurfSpot snaroy = new SurfSpot();
-        snaroy.setId(2L);
-        snaroy.setName("Snarøya");
-        snaroy.setLatitude(59.888479);
-        snaroy.longitude(10.634014);
-
-        repository.save(snaroy);
+        repository.save(new SurfSpot()
+            .name("Snarøya")
+            .latitude(59.888479)
+            .longitude(10.634014));
     }
 }

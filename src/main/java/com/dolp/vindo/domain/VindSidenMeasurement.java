@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = "VindSidenMeasurement")
+@XmlRootElement(name = "Measurement")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class VindSidenMeasurement {
     @XmlElement(name = "DataID")
