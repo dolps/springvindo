@@ -6,6 +6,8 @@ import {LoginModalService, Principal, Account} from 'app/core';
 import {SurfSpotService} from '../entities/surf-spot';
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {ISurfSpot} from "../shared/model/surf-spot.model";
+import {IMeasurement} from "../shared/model/measurement.model";
+import {MeasurementService} from "../entities/measurement";
 
 @Component({
     selector: 'jhi-home',
@@ -16,6 +18,8 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     surfSpots: ISurfSpot[];
+    measurements: IMeasurement[];
+    chartData: any[];
     surfLocations: any;
     lat = 59.664890;
     lng = 10.630013;
@@ -24,11 +28,13 @@ export class HomeComponent implements OnInit {
                 private loginModalService: LoginModalService,
                 private eventManager: JhiEventManager,
                 private jhiAlertService: JhiAlertService,
+                private measurementService: MeasurementService,
                 private surfSpotService: SurfSpotService) {
     }
 
     ngOnInit() {
         this.loadSurfSpots();
+        this.loadMeasurements();
 
         this.principal.identity().then(account => {
             this.account = account;
@@ -68,6 +74,21 @@ export class HomeComponent implements OnInit {
         this.surfSpotService.query().subscribe(
             (res: HttpResponse<ISurfSpot[]>) => {
                 this.surfSpots = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    loadMeasurements() {
+        this.measurementService.query().subscribe(
+            (res: HttpResponse<IMeasurement[]>) => {
+                this.measurements = res.body;
+
+                this.chartData = [];
+                this.measurements.forEach((m) => {
+                    this.chartData.push([m.windAvg, m.directionAverage]);
+                })
+                this.chartData.reverse();
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

@@ -3,7 +3,7 @@
         <div *ngFor="let l of surfSpots">
             {{l.name}}{{l.latitude}}
         </div>
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
+        <agm-map *ngIf=" measurements && measurements.length > 0" [latitude]="lat" [longitude]="lng" [zoom]="10">
             <agm-marker *ngFor="let location of surfSpots; let i=index;"
                         [latitude]="location.latitude"
                         [longitude]="location.longitude"
@@ -11,7 +11,7 @@
                         (markerClick)="markerClicked(location, i)">
 
                 <agm-info-window>
-                    <jhi-today-wind-chart>
+                    <jhi-today-wind-chart [chartData]="chartData">
 
                     </jhi-today-wind-chart>
 
