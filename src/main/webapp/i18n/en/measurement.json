@@ -1,0 +1,28 @@
+
+{
+    "vindoApp": {
+        "measurement" : {
+            "home": {
+                "title": "Measurements",
+                "createLabel": "Create a new Measurement",
+                "createOrEditLabel": "Create or edit a Measurement"
+            },
+            "created": "A new Measurement is created with identifier {{ param }}",
+            "updated": "A Measurement is updated with identifier {{ param }}",
+            "deleted": "A Measurement is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Measurement {{ id }}?"
+            },
+            "detail": {
+                "title": "Measurement"
+            },
+            "stationId": "Station Id",
+            "windAvg": "Wind Avg",
+            "windStDev": "Wind St Dev",
+            "windMax": "Wind Max",
+            "windMin": "Wind Min",
+            "directionAverage": "Direction Average",
+            "time": "Time"
+        }
+    }
+}

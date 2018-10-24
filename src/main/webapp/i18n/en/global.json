@@ -8,6 +8,7 @@
             "entities": {
                 "main": "Entities",
                 "surfSpot": "Surf Spot",
+                "measurement": "Measurement",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -64,22 +64,6 @@ public class VindoApp {
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
-
-        fetchVindsidenData();
-    }
-
-    private static void fetchVindsidenData() {
-        RestTemplate template = new RestTemplate();
-        VindSidenMeasurementResponse vindSidenMeasurementResponse = template.getForObject("http://vindsiden.no/xml.aspx?id=3", VindSidenMeasurementResponse.class);
-        //VindSidenMeasurement[] vindSidenMeasurements = template.getForObject("http://vindsiden.no/xml.aspx?id=3", VindSidenMeasurement[].class);
-
-
-        if (vindSidenMeasurementResponse.getVindSidenMeasurements() != null) {
-            log.info("measurement: " + vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).toString());
-            log.info("norwegian direction: " + vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).getNorwegianNameFromDirectionValue());
-        } else {
-            log.info("measurement not found");
-        }
     }
 
     private static void logApplicationStartup(Environment env) {

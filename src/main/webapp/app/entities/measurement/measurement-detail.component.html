@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="measurement">
+            <h2><span jhiTranslate="vindoApp.measurement.detail.title">Measurement</span> {{measurement.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="vindoApp.measurement.stationId">Station Id</span></dt>
+                <dd>
+                    <span>{{measurement.stationId}}</span>
+                </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.windAvg">Wind Avg</span></dt>
+                <dd>
+                    <span>{{measurement.windAvg}}</span>
+                </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.windStDev">Wind St Dev</span></dt>
+                <dd>
+                    <span>{{measurement.windStDev}}</span>
+                </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.windMax">Wind Max</span></dt>
+                <dd>
+                    <span>{{measurement.windMax}}</span>
+                </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.windMin">Wind Min</span></dt>
+                <dd>
+                    <span>{{measurement.windMin}}</span>
+                </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.directionAverage">Direction Average</span></dt>
+                <dd>
+                    <span>{{measurement.directionAverage}}</span>
+                </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.time">Time</span></dt>
+                <dd>
+                    <span>{{measurement.time}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/measurement', measurement.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

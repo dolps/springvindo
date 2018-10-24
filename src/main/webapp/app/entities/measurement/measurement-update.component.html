@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-measurement-heading" jhiTranslate="vindoApp.measurement.home.createOrEditLabel">Create or edit a Measurement</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!measurement.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="measurement.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.stationId" for="field_stationId">Station Id</label>
+                    <input type="number" class="form-control" name="stationId" id="field_stationId"
+                        [(ngModel)]="measurement.stationId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.windAvg" for="field_windAvg">Wind Avg</label>
+                    <input type="number" class="form-control" name="windAvg" id="field_windAvg"
+                        [(ngModel)]="measurement.windAvg" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.windStDev" for="field_windStDev">Wind St Dev</label>
+                    <input type="number" class="form-control" name="windStDev" id="field_windStDev"
+                        [(ngModel)]="measurement.windStDev" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.windMax" for="field_windMax">Wind Max</label>
+                    <input type="number" class="form-control" name="windMax" id="field_windMax"
+                        [(ngModel)]="measurement.windMax" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.windMin" for="field_windMin">Wind Min</label>
+                    <input type="number" class="form-control" name="windMin" id="field_windMin"
+                        [(ngModel)]="measurement.windMin" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.directionAverage" for="field_directionAverage">Direction Average</label>
+                    <input type="number" class="form-control" name="directionAverage" id="field_directionAverage"
+                        [(ngModel)]="measurement.directionAverage" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.time" for="field_time">Time</label>
+                    <div class="d-flex">
+                        <input id="field_time" type="datetime-local" class="form-control" name="time" [(ngModel)]="time"
+                        />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

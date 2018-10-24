@@ -1,0 +1,42 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "stationId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "windAvg",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windStDev",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windMax",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "windMin",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "directionAverage",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "time",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20181024170640",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "measurement",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}
