@@ -30,6 +30,10 @@ public class SurfSpotCriteria implements Serializable {
 
     private DoubleFilter longitude;
 
+    private IntegerFilter stationId;
+
+    private LongFilter measurementsId;
+
     public SurfSpotCriteria() {
     }
 
@@ -65,6 +69,22 @@ public class SurfSpotCriteria implements Serializable {
         this.longitude = longitude;
     }
 
+    public IntegerFilter getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(IntegerFilter stationId) {
+        this.stationId = stationId;
+    }
+
+    public LongFilter getMeasurementsId() {
+        return measurementsId;
+    }
+
+    public void setMeasurementsId(LongFilter measurementsId) {
+        this.measurementsId = measurementsId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -79,7 +99,9 @@ public class SurfSpotCriteria implements Serializable {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(latitude, that.latitude) &&
-            Objects.equals(longitude, that.longitude);
+            Objects.equals(longitude, that.longitude) &&
+            Objects.equals(stationId, that.stationId) &&
+            Objects.equals(measurementsId, that.measurementsId);
     }
 
     @Override
@@ -88,7 +110,9 @@ public class SurfSpotCriteria implements Serializable {
         id,
         name,
         latitude,
-        longitude
+        longitude,
+        stationId,
+        measurementsId
         );
     }
 
@@ -99,6 +123,8 @@ public class SurfSpotCriteria implements Serializable {
                 (name != null ? "name=" + name + ", " : "") +
                 (latitude != null ? "latitude=" + latitude + ", " : "") +
                 (longitude != null ? "longitude=" + longitude + ", " : "") +
+                (stationId != null ? "stationId=" + stationId + ", " : "") +
+                (measurementsId != null ? "measurementsId=" + measurementsId + ", " : "") +
             "}";
     }
 

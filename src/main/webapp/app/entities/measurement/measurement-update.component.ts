@@ -4,9 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService } from 'ng-jhipster';
 
 import { IMeasurement } from 'app/shared/model/measurement.model';
 import { MeasurementService } from './measurement.service';
+import { ISurfSpot } from 'app/shared/model/surf-spot.model';
+import { SurfSpotService } from 'app/entities/surf-spot';
 
 @Component({
     selector: 'jhi-measurement-update',
@@ -15,15 +18,28 @@ import { MeasurementService } from './measurement.service';
 export class MeasurementUpdateComponent implements OnInit {
     private _measurement: IMeasurement;
     isSaving: boolean;
+
+    surfspots: ISurfSpot[];
     time: string;
 
-    constructor(private measurementService: MeasurementService, private activatedRoute: ActivatedRoute) {}
+    constructor(
+        private jhiAlertService: JhiAlertService,
+        private measurementService: MeasurementService,
+        private surfSpotService: SurfSpotService,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ measurement }) => {
             this.measurement = measurement;
         });
+        this.surfSpotService.query().subscribe(
+            (res: HttpResponse<ISurfSpot[]>) => {
+                this.surfspots = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -51,6 +67,14 @@ export class MeasurementUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackSurfSpotById(index: number, item: ISurfSpot) {
+        return item.id;
     }
     get measurement() {
         return this._measurement;

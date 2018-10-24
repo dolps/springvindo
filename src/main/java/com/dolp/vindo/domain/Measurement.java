@@ -1,5 +1,6 @@
 package com.dolp.vindo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -41,6 +42,10 @@ public class Measurement implements Serializable {
 
     @Column(name = "jhi_time")
     private Instant time;
+
+    @ManyToOne
+    @JsonIgnoreProperties("measurements")
+    private SurfSpot surfSpot;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -140,6 +145,19 @@ public class Measurement implements Serializable {
 
     public void setTime(Instant time) {
         this.time = time;
+    }
+
+    public SurfSpot getSurfSpot() {
+        return surfSpot;
+    }
+
+    public Measurement surfSpot(SurfSpot surfSpot) {
+        this.surfSpot = surfSpot;
+        return this;
+    }
+
+    public void setSurfSpot(SurfSpot surfSpot) {
+        this.surfSpot = surfSpot;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

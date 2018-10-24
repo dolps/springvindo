@@ -47,6 +47,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="vindoApp.measurement.surfSpot" for="field_surfSpot">Surf Spot</label>
+                    <select class="form-control" id="field_surfSpot" name="surfSpot" [(ngModel)]="measurement.surfSpotId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="surfSpotOption.id" *ngFor="let surfSpotOption of surfspots; trackBy: trackSurfSpotById">{{surfSpotOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

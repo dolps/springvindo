@@ -9,6 +9,7 @@ export interface IMeasurement {
     windMin?: number;
     directionAverage?: number;
     time?: Moment;
+    surfSpotId?: number;
 }
 
 export class Measurement implements IMeasurement {
@@ -20,6 +21,7 @@ export class Measurement implements IMeasurement {
         public windMax?: number,
         public windMin?: number,
         public directionAverage?: number,
-        public time?: Moment
+        public time?: Moment,
+        public surfSpotId?: number
     ) {}
 }

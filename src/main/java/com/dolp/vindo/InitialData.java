@@ -2,6 +2,7 @@ package com.dolp.vindo;
 
 import com.dolp.vindo.domain.Measurement;
 import com.dolp.vindo.domain.SurfSpot;
+import com.dolp.vindo.domain.VindSidenMeasurement;
 import com.dolp.vindo.domain.VindSidenMeasurementResponse;
 import com.dolp.vindo.repository.MeasurementRepository;
 import com.dolp.vindo.repository.SurfSpotRepository;
@@ -13,13 +14,15 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.*;
 
 @Component
 public class InitialData implements ApplicationRunner {
     private static final Logger log = LoggerFactory.getLogger(InitialData.class);
+    private static final String VINDSIDEN_URL = "http://vindsiden.no/xml.aspx?id=";
 
     @Autowired
     private SurfSpotRepository surfSpotRepository;
@@ -28,35 +31,43 @@ public class InitialData implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        fetchVindsidenData();
-
-        surfSpotRepository.save(new SurfSpot()
+        SurfSpot verket = surfSpotRepository.save(new SurfSpot()
             .name("Verket")
+            .stationId(3)
             .latitude(59.612221)
             .longitude(10.413914));
+
+        List<VindSidenMeasurement> vindSidenMeasurements = fetchVindsidenMeasurements(3);
+        List<Measurement> measurements = convertToMeasurements(vindSidenMeasurements);
+        measurements.forEach(m -> m.setSurfSpot(verket));
+        measurementRepository.saveAll(measurements);
 
         surfSpotRepository.save(new SurfSpot()
             .name("Snarøya")
             .latitude(59.888479)
             .longitude(10.634014));
-
-
-        measurementRepository.save(new Measurement().stationId(3).windAvg(2.9));
     }
 
-    private void fetchVindsidenData() {
+    private List<Measurement> convertToMeasurements(List<VindSidenMeasurement> vindSidenMeasurements) {
+        List<Measurement> measurements = new ArrayList<>();
+        vindSidenMeasurements.forEach(m -> {
+            measurements.add(new Measurement().time(m.getTime().toInstant()).windAvg(m.getWindAvg()).directionAverage(m.getDirectionAvg()));
+        });
+
+        return measurements;
+    }
+
+    private List<VindSidenMeasurement> fetchVindsidenMeasurements(int stationId) {
         RestTemplate template = new RestTemplate();
         VindSidenMeasurementResponse vindSidenMeasurementResponse =
-            template.getForObject("http://vindsiden.no/xml.aspx?id=3", VindSidenMeasurementResponse.class);
-
+            template.getForObject(VINDSIDEN_URL + stationId, VindSidenMeasurementResponse.class);
         assert vindSidenMeasurementResponse != null;
         if (vindSidenMeasurementResponse.getVindSidenMeasurements() != null) {
-            log.info("measurement: " + vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).toString());
-            log.info("norwegian direction: " + vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).getNorwegianNameFromDirectionValue());
-            Date d = vindSidenMeasurementResponse.getVindSidenMeasurements().get(0).getTime();
-            measurementRepository.save(new Measurement().stationId(3).windAvg(2.9).time(d.toInstant()));
+            return vindSidenMeasurementResponse.getVindSidenMeasurements();
         } else {
-            log.info("measurement not found");
+            return null;
         }
+
+
     }
 }

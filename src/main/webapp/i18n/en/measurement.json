@@ -22,7 +22,8 @@
             "windMax": "Wind Max",
             "windMin": "Wind Min",
             "directionAverage": "Direction Average",
-            "time": "Time"
+            "time": "Time",
+            "surfSpot": "Surf Spot"
         }
     }
 }

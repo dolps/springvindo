@@ -1,9 +1,12 @@
 package com.dolp.vindo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -12,6 +15,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "surf_spot")
 public class SurfSpot implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,6 +31,12 @@ public class SurfSpot implements Serializable {
 
     @Column(name = "longitude")
     private Double longitude;
+
+    @Column(name = "station_id")
+    private Integer stationId;
+
+    @OneToMany(mappedBy = "surfSpot")
+    private Set<Measurement> measurements = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -75,6 +85,44 @@ public class SurfSpot implements Serializable {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public SurfSpot stationId(Integer stationId) {
+        this.stationId = stationId;
+        return this;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
+    }
+
+    public Set<Measurement> getMeasurements() {
+        return measurements;
+    }
+
+    public SurfSpot measurements(Set<Measurement> measurements) {
+        this.measurements = measurements;
+        return this;
+    }
+
+    public SurfSpot addMeasurements(Measurement measurement) {
+        this.measurements.add(measurement);
+        measurement.setSurfSpot(this);
+        return this;
+    }
+
+    public SurfSpot removeMeasurements(Measurement measurement) {
+        this.measurements.remove(measurement);
+        measurement.setSurfSpot(null);
+        return this;
+    }
+
+    public void setMeasurements(Set<Measurement> measurements) {
+        this.measurements = measurements;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -104,6 +152,7 @@ public class SurfSpot implements Serializable {
             ", name='" + getName() + "'" +
             ", latitude=" + getLatitude() +
             ", longitude=" + getLongitude() +
+            ", stationId=" + getStationId() +
             "}";
     }
 }

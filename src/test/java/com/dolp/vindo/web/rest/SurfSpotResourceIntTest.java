@@ -3,6 +3,7 @@ package com.dolp.vindo.web.rest;
 import com.dolp.vindo.VindoApp;
 
 import com.dolp.vindo.domain.SurfSpot;
+import com.dolp.vindo.domain.Measurement;
 import com.dolp.vindo.repository.SurfSpotRepository;
 import com.dolp.vindo.service.SurfSpotService;
 import com.dolp.vindo.service.dto.SurfSpotDTO;
@@ -53,6 +54,9 @@ public class SurfSpotResourceIntTest {
     private static final Double DEFAULT_LONGITUDE = 1D;
     private static final Double UPDATED_LONGITUDE = 2D;
 
+    private static final Integer DEFAULT_STATION_ID = 1;
+    private static final Integer UPDATED_STATION_ID = 2;
+
     @Autowired
     private SurfSpotRepository surfSpotRepository;
 
@@ -102,7 +106,8 @@ public class SurfSpotResourceIntTest {
         SurfSpot surfSpot = new SurfSpot()
             .name(DEFAULT_NAME)
             .latitude(DEFAULT_LATITUDE)
-            .longitude(DEFAULT_LONGITUDE);
+            .longitude(DEFAULT_LONGITUDE)
+            .stationId(DEFAULT_STATION_ID);
         return surfSpot;
     }
 
@@ -130,6 +135,7 @@ public class SurfSpotResourceIntTest {
         assertThat(testSurfSpot.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSurfSpot.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testSurfSpot.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testSurfSpot.getStationId()).isEqualTo(DEFAULT_STATION_ID);
     }
 
     @Test
@@ -165,7 +171,8 @@ public class SurfSpotResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(surfSpot.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())));
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].stationId").value(hasItem(DEFAULT_STATION_ID)));
     }
     
     @Test
@@ -181,7 +188,8 @@ public class SurfSpotResourceIntTest {
             .andExpect(jsonPath("$.id").value(surfSpot.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
-            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()));
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
+            .andExpect(jsonPath("$.stationId").value(DEFAULT_STATION_ID));
     }
 
     @Test
@@ -300,6 +308,91 @@ public class SurfSpotResourceIntTest {
         // Get all the surfSpotList where longitude is null
         defaultSurfSpotShouldNotBeFound("longitude.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllSurfSpotsByStationIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        surfSpotRepository.saveAndFlush(surfSpot);
+
+        // Get all the surfSpotList where stationId equals to DEFAULT_STATION_ID
+        defaultSurfSpotShouldBeFound("stationId.equals=" + DEFAULT_STATION_ID);
+
+        // Get all the surfSpotList where stationId equals to UPDATED_STATION_ID
+        defaultSurfSpotShouldNotBeFound("stationId.equals=" + UPDATED_STATION_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSurfSpotsByStationIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        surfSpotRepository.saveAndFlush(surfSpot);
+
+        // Get all the surfSpotList where stationId in DEFAULT_STATION_ID or UPDATED_STATION_ID
+        defaultSurfSpotShouldBeFound("stationId.in=" + DEFAULT_STATION_ID + "," + UPDATED_STATION_ID);
+
+        // Get all the surfSpotList where stationId equals to UPDATED_STATION_ID
+        defaultSurfSpotShouldNotBeFound("stationId.in=" + UPDATED_STATION_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSurfSpotsByStationIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        surfSpotRepository.saveAndFlush(surfSpot);
+
+        // Get all the surfSpotList where stationId is not null
+        defaultSurfSpotShouldBeFound("stationId.specified=true");
+
+        // Get all the surfSpotList where stationId is null
+        defaultSurfSpotShouldNotBeFound("stationId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllSurfSpotsByStationIdIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        surfSpotRepository.saveAndFlush(surfSpot);
+
+        // Get all the surfSpotList where stationId greater than or equals to DEFAULT_STATION_ID
+        defaultSurfSpotShouldBeFound("stationId.greaterOrEqualThan=" + DEFAULT_STATION_ID);
+
+        // Get all the surfSpotList where stationId greater than or equals to UPDATED_STATION_ID
+        defaultSurfSpotShouldNotBeFound("stationId.greaterOrEqualThan=" + UPDATED_STATION_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSurfSpotsByStationIdIsLessThanSomething() throws Exception {
+        // Initialize the database
+        surfSpotRepository.saveAndFlush(surfSpot);
+
+        // Get all the surfSpotList where stationId less than or equals to DEFAULT_STATION_ID
+        defaultSurfSpotShouldNotBeFound("stationId.lessThan=" + DEFAULT_STATION_ID);
+
+        // Get all the surfSpotList where stationId less than or equals to UPDATED_STATION_ID
+        defaultSurfSpotShouldBeFound("stationId.lessThan=" + UPDATED_STATION_ID);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllSurfSpotsByMeasurementsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Measurement measurements = MeasurementResourceIntTest.createEntity(em);
+        em.persist(measurements);
+        em.flush();
+        surfSpot.addMeasurements(measurements);
+        surfSpotRepository.saveAndFlush(surfSpot);
+        Long measurementsId = measurements.getId();
+
+        // Get all the surfSpotList where measurements equals to measurementsId
+        defaultSurfSpotShouldBeFound("measurementsId.equals=" + measurementsId);
+
+        // Get all the surfSpotList where measurements equals to measurementsId + 1
+        defaultSurfSpotShouldNotBeFound("measurementsId.equals=" + (measurementsId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -310,7 +403,8 @@ public class SurfSpotResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(surfSpot.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())));
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].stationId").value(hasItem(DEFAULT_STATION_ID)));
     }
 
     /**
@@ -348,7 +442,8 @@ public class SurfSpotResourceIntTest {
         updatedSurfSpot
             .name(UPDATED_NAME)
             .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE);
+            .longitude(UPDATED_LONGITUDE)
+            .stationId(UPDATED_STATION_ID);
         SurfSpotDTO surfSpotDTO = surfSpotMapper.toDto(updatedSurfSpot);
 
         restSurfSpotMockMvc.perform(put("/api/surf-spots")
@@ -363,6 +458,7 @@ public class SurfSpotResourceIntTest {
         assertThat(testSurfSpot.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSurfSpot.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testSurfSpot.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testSurfSpot.getStationId()).isEqualTo(UPDATED_STATION_ID);
     }
 
     @Test

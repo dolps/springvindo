@@ -25,6 +25,8 @@ public class MeasurementDTO implements Serializable {
 
     private Instant time;
 
+    private Long surfSpotId;
+
     public Long getId() {
         return id;
     }
@@ -89,6 +91,14 @@ public class MeasurementDTO implements Serializable {
         this.time = time;
     }
 
+    public Long getSurfSpotId() {
+        return surfSpotId;
+    }
+
+    public void setSurfSpotId(Long surfSpotId) {
+        this.surfSpotId = surfSpotId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -121,6 +131,7 @@ public class MeasurementDTO implements Serializable {
             ", windMin=" + getWindMin() +
             ", directionAverage=" + getDirectionAverage() +
             ", time='" + getTime() + "'" +
+            ", surfSpot=" + getSurfSpotId() +
             "}";
     }
 }

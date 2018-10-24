@@ -18,7 +18,9 @@
             },
             "name": "Name",
             "latitude": "Latitude",
-            "longitude": "Longitude"
+            "longitude": "Longitude",
+            "stationId": "Station Id",
+            "measurements": "Measurements"
         }
     }
 }

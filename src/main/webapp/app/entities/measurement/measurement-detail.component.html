@@ -33,6 +33,12 @@
                 <dd>
                     <span>{{measurement.time}}</span>
                 </dd>
+                <dt><span jhiTranslate="vindoApp.measurement.surfSpot">Surf Spot</span></dt>
+                <dd>
+                    <div *ngIf="measurement.surfSpotId">
+                        <a [routerLink]="['/surf-spot', measurement.surfSpotId, 'view']">{{measurement.surfSpotId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

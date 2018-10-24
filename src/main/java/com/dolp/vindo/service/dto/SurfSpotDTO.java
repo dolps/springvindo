@@ -16,6 +16,8 @@ public class SurfSpotDTO implements Serializable {
 
     private Double longitude;
 
+    private Integer stationId;
+
     public Long getId() {
         return id;
     }
@@ -48,6 +50,14 @@ public class SurfSpotDTO implements Serializable {
         this.longitude = longitude;
     }
 
+    public Integer getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Integer stationId) {
+        this.stationId = stationId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -76,6 +86,7 @@ public class SurfSpotDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", latitude=" + getLatitude() +
             ", longitude=" + getLongitude() +
+            ", stationId=" + getStationId() +
             "}";
     }
 }

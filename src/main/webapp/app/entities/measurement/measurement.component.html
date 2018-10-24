@@ -22,6 +22,7 @@
             <th jhiSortBy="windMin"><span jhiTranslate="vindoApp.measurement.windMin">Wind Min</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="directionAverage"><span jhiTranslate="vindoApp.measurement.directionAverage">Direction Average</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="time"><span jhiTranslate="vindoApp.measurement.time">Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="surfSpotId"><span jhiTranslate="vindoApp.measurement.surfSpot">Surf Spot</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -35,6 +36,11 @@
                 <td>{{measurement.windMin}}</td>
                 <td>{{measurement.directionAverage}}</td>
                 <td>{{measurement.time | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="measurement.surfSpotId">
+                        <a [routerLink]="['../surf-spot', measurement.surfSpotId , 'view' ]" >{{measurement.surfSpotId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface SurfSpotMapper extends EntityMapper<SurfSpotDTO, SurfSpot> {
 
 
+    @Mapping(target = "measurements", ignore = true)
+    SurfSpot toEntity(SurfSpotDTO surfSpotDTO);
 
     default SurfSpot fromId(Long id) {
         if (id == null) {

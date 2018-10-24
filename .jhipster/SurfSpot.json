@@ -1,7 +1,14 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "measurements",
+            "otherEntityName": "measurement",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "surfSpot"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",
@@ -14,6 +21,10 @@
         {
             "fieldName": "longitude",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "stationId",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20181023175621",
